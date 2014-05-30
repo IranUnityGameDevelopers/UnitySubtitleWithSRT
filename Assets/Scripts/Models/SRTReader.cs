@@ -21,7 +21,7 @@ public class SRTReader : MonoBehaviour
 			string line;
 			// Create a new StreamReader, tell it which file to read and what encoding the file
 			// was saved as
-			StreamReader theReader = new StreamReader(AssetDatabase.GetAssetPath(srtFile), Encoding.Default);
+			StreamReader theReader = new StreamReader(AssetDatabase.GetAssetPath(srtFile), Encoding.UTF8);
 			
 			// Immediately clean up the reader after this block of code is done.
 			// You generally use the "using" statement for potentially memory-intensive objects
