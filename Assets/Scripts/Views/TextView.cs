@@ -18,7 +18,7 @@ public class TextView : MonoBehaviour
 	// use this function to show text
 	public void setText(string _text)
 	{
-
+		guiText.text = _text;
 	}
 
 

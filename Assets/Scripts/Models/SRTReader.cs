@@ -12,12 +12,8 @@ public class SRTReader : MonoBehaviour
 
 	private List<SRT> srtArray = new List<SRT>();
 
-	void Start()
-	{
-		Load();
-	}
 
-	private bool Load()
+	public bool Load()
 	{
 		// Handle any problems that might arise when reading the text
 		try
@@ -37,6 +33,7 @@ public class SRTReader : MonoBehaviour
 				readState state;
 				state = readState.srtNumber;
 				string temp = "";
+				float diffTime = 0;
 				// While there's lines left in the text file, do this:
 				do
 				{
@@ -52,15 +49,17 @@ public class SRTReader : MonoBehaviour
 							string[] entries = line.Split(new string[] { "-->" } , System.StringSplitOptions.None);
 							if (entries.Length > 0)
 							{
-								Debug.Log("initial Time : " + entries[0]);
-								Debug.Log("final Time : " + entries[1]);
+								Debug.Log("initial Time : " + getTime( entries[0]));
+								Debug.Log("final Time : " + getTime( entries[1]));
 							}
+							diffTime = getTime( entries[1]) - getTime( entries[0]);
 							state = readState.text;
 							break;
 						case readState.text :
 							if (line.Equals("")) {
 								state = readState.srtNumber;
 								Debug.Log("text : " + temp);
+								srtArray.Add(new SRT(temp , diffTime));
 								temp = "";
 							}
 							else {
@@ -72,6 +71,7 @@ public class SRTReader : MonoBehaviour
 				}
 				while (line != null);
 				Debug.Log("text : " + temp);
+				srtArray.Add(new SRT(temp , diffTime));
 				// Done reading, close the reader and return true to broadcast success    
 				theReader.Close();
 				return true;
@@ -90,6 +90,18 @@ public class SRTReader : MonoBehaviour
 	public List<SRT> getList()
 	{
 		return srtArray;
+	}
+
+	private float getTime(string _time)
+	{
+		float time = 0;
+		string[] entries = _time.Split(',');
+		string[] entries2 = entries[0].Split(':');
+		time = float.Parse( entries2[0]) * 3600 
+			+ float.Parse(entries2[1]) * 60 
+				+ float.Parse(entries2[2])
+				+  float.Parse(entries[1]) /(float) Mathf.Pow(10 , entries[1].Trim().Length);
+		return time;
 	}
 
 
