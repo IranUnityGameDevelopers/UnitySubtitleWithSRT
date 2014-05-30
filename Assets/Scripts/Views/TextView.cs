@@ -7,9 +7,12 @@ public class TextView : MonoBehaviour
 {
 	public static TextView Instance;
 
+	public bool isShowingText;
+
 	void Awake()
 	{
 		Instance = this;
+		isShowingText = false;
 	}
 
 	// use this function to show text
@@ -18,7 +21,5 @@ public class TextView : MonoBehaviour
 
 	}
 
-
-	public void 
 
 }
