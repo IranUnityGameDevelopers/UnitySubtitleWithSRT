@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using ArabicSupport;
+using PersianSupport;
 
 public class SetArabicTextExample : MonoBehaviour {
 	
@@ -9,7 +9,7 @@ public class SetArabicTextExample : MonoBehaviour {
 	// Use this for initialization
 	void Start () {	
 		gameObject.guiText.text = "This sentence (wrong display):\n" + text +
-			"\n\nWill appear correctly as:\n" + ArabicFixer.Fix(text, false, false);
+			"\n\nWill appear correctly as:\n" + PersianFixer.Fix(text, false, false);
 	}
 	
 	// Update is called once per frame

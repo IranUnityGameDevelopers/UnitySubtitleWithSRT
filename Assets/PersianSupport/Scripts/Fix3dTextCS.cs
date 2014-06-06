@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
-using ArabicSupport;
+using PersianSupport;
 
-public class FixGUITextCS : MonoBehaviour {
+public class Fix3dTextCS : MonoBehaviour {
 	
 	public string text;
 	public bool tashkeel = true;
@@ -10,7 +10,7 @@ public class FixGUITextCS : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		gameObject.guiText.text = ArabicFixer.Fix(text, tashkeel, hinduNumbers);
+		gameObject.GetComponent<TextMesh>().text = PersianFixer.Fix(text, tashkeel, hinduNumbers);
 	}
 	
 	// Update is called once per frame

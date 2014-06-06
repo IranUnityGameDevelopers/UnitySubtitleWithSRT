@@ -2,7 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
-using ArabicSupport;
+using PersianSupport;
 
 public class TextView : MonoBehaviour 
 {
@@ -22,7 +22,8 @@ public class TextView : MonoBehaviour
 	// use this function to show text
 	public void setText(string _text)
 	{
-		textMesh.text = ArabicFixer.Fix(_text,showTashkeel: false, useHinduNumbers: true);
+		//textMesh.text = ArabicFixer.Fix(_text,showTashkeel: false, useHinduNumbers: true);
+		textMesh.text = PersianFixer.Fix (_text , showTashkeel: false , useHinduNumbers: true);
 	}
 
 

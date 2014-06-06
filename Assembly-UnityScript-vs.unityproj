@@ -46,12 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ArabicSupport\Scripts\Fix3dTextJS.js" />
-     <Compile Include="Assets\ArabicSupport\Scripts\FixGUITextJS.js" />
+     <Compile Include="Assets\PersianSupport\Scripts\Fix3dTextJS.js" />
+     <Compile Include="Assets\PersianSupport\Scripts\FixGUITextJS.js" />
      <None Include="Assets\SRTFiles\sample.txt" />
      <None Include="Assets\SRTFiles\sample_Fa.txt" />
- <Reference Include="ArabicSupport">
- <HintPath>/Users/Amin/Documents/SRTReader/Assets/ArabicSupport/Plugins/ArabicSupport.dll</HintPath>
+ <Reference Include="PersianSupport">
+ <HintPath>/Users/Amin/Documents/SRTReader/Assets/PersianSupport/Plugins/PersianSupport.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
