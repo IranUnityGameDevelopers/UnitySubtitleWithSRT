@@ -59,7 +59,7 @@ public class SRTReader : MonoBehaviour
 							if (line.Equals("")) {
 								state = readState.srtNumber;
 								Debug.Log("text : " + temp);
-								srtArray.Add(new SRT(temp , diffTime));
+								srtArray.Add(SRT.CreateInstance(temp , diffTime));
 								temp = "";
 							}
 							else {
@@ -71,7 +71,7 @@ public class SRTReader : MonoBehaviour
 				}
 				while (line != null);
 				Debug.Log("text : " + temp);
-				srtArray.Add(new SRT(temp , diffTime));
+				srtArray.Add(SRT.CreateInstance(temp , diffTime));
 				// Done reading, close the reader and return true to broadcast success    
 				theReader.Close();
 				return true;

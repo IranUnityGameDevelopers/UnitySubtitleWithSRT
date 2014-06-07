@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class srtReaderEditor : EditorWindow
 {
 	// Add menu item named "srt Reader" to the Window menu
-	[MenuItem("Component/srt Reader")]
+	[MenuItem("Subtitle/srt Reader")]
 	public static void ShowWindow()
 	{
 		//Show existing window instance. If one doesn't exist, make one.
