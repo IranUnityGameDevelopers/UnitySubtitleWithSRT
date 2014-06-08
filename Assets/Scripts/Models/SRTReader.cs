@@ -5,15 +5,25 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEditor;
 
-public class SRTReader : MonoBehaviour 
+public class SRTReader 
 {
-
-	public TextAsset srtFile;
-
 	private List<SRT> srtArray = new List<SRT>();
 
 
-	public bool Load()
+	private float getTime(string _time)
+	{
+		float time = 0;
+		string[] entries = _time.Split(',');
+		string[] entries2 = entries[0].Split(':');
+		time = float.Parse( entries2[0]) * 3600 
+			+ float.Parse(entries2[1]) * 60 
+				+ float.Parse(entries2[2])
+				+  float.Parse(entries[1]) /(float) Mathf.Pow(10 , entries[1].Trim().Length);
+		return time;
+	}
+
+
+	public bool Load(string path)
 	{
 		// Handle any problems that might arise when reading the text
 		try
@@ -21,7 +31,7 @@ public class SRTReader : MonoBehaviour
 			string line;
 			// Create a new StreamReader, tell it which file to read and what encoding the file
 			// was saved as
-			StreamReader theReader = new StreamReader(AssetDatabase.GetAssetPath(srtFile), Encoding.UTF8);
+			StreamReader theReader = new StreamReader(path, Encoding.UTF8);
 			
 			// Immediately clean up the reader after this block of code is done.
 			// You generally use the "using" statement for potentially memory-intensive objects
@@ -87,22 +97,34 @@ public class SRTReader : MonoBehaviour
 		}
 	}
 
-	public List<SRT> getList()
+
+
+	public List<SRT> getSRTList()
 	{
 		return srtArray;
 	}
 
-	private float getTime(string _time)
+	public List<string> getTexts()
 	{
-		float time = 0;
-		string[] entries = _time.Split(',');
-		string[] entries2 = entries[0].Split(':');
-		time = float.Parse( entries2[0]) * 3600 
-			+ float.Parse(entries2[1]) * 60 
-				+ float.Parse(entries2[2])
-				+  float.Parse(entries[1]) /(float) Mathf.Pow(10 , entries[1].Trim().Length);
-		return time;
+		List<string> texts = new List<string> ();
+		foreach (var item in srtArray) {
+			texts.Add(item.text);
+		}
+		return texts;
 	}
+
+	public List<float> getTimes()
+	{
+		List<float> times = new List<float> ();
+		foreach (var item in srtArray) {
+			times.Add(item.time);
+		}
+		return times;
+	}
+
+
+
+
 
 
 }

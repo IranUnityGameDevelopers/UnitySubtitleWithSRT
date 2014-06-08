@@ -2,27 +2,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MyWindow : EditorWindow
+public class CreateNewSRTFile : EditorWindow
 {
-	string myString = "Hello World";
-	bool groupEnabled;
-	bool myBool = true;
-	float myFloat = 1.23f;
-
-
-	// Mine
+	
 	private List<string> texts = new List<string>();
 	private List<float> times = new List<float>();
 	private int index = 0;
 	private Vector2 scrollPos;
 
+	private SRTWriter writer;
 	
-	// Add menu item named "My Window" to the Window menu
 	[MenuItem("Subtitle/Create new SRT File")]
 	public static void ShowWindow()
 	{
 		//Show existing window instance. If one doesn't exist, make one.
-		EditorWindow.GetWindow(typeof(MyWindow));
+		EditorWindow.GetWindow(typeof(CreateNewSRTFile));
 	}
 	
 	void OnGUI()
@@ -54,7 +48,8 @@ public class MyWindow : EditorWindow
 
 	void saveToFile()
 	{
-
+		writer = new SRTWriter ();
+		writer.writeToFile (texts , times , Application.dataPath+"/SRTFiles/newSRTFile.txt");
 	}
 
 	void removeLast()
@@ -72,6 +67,6 @@ public class MyWindow : EditorWindow
 		texts.Add ("");
 		times.Add (0);
 		index++;
-		Debug.Log (index + " , " + texts.Count + " , " + times.Count);
+		//Debug.Log (index + " , " + texts.Count + " , " + times.Count);
 	}
 }

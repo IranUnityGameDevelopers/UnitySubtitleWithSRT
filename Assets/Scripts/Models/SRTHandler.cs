@@ -1,20 +1,31 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
 public class SRTHandler : MonoBehaviour 
 {
+	public static SRTHandler Instance;
+
 	private SRTReader reader;
 
 
+	public List<SRT> activeSRTList;
 	public int currentIndexOfSubtitle = -1;
+	public TextAsset srtFile;
 
+
+	void Awake()
+	{
+		Instance = this;
+	}
 
 	void Start()
 	{
-		reader = gameObject.GetComponent<SRTReader>();
-		if (reader.Load()) {
-			StartCoroutine(startSrt(reader.getList()));
+		reader = new SRTReader ();
+		if (reader.Load(AssetDatabase.GetAssetPath(srtFile))) {
+			activeSRTList = reader.getSRTList();
+			StartCoroutine(startSrt(activeSRTList));
 		}
 		else
 			Debug.LogError("Can't load file");
